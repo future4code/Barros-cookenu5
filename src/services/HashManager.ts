@@ -1,4 +1,7 @@
 import * as bcrypt from 'bcryptjs'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 class HashManager {
     hash = async (password: string): Promise<string> => {

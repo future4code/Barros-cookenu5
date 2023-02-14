@@ -1,0 +1,11 @@
+//-------- Users endpoints --------//
+
+###
+POST http://localhost:3306/users/signup
+Content-Type: application/json
+
+{
+    "fullName": "Janaina Santos",
+    "email": "janaina@gmail.com",
+    "password": "ghijkl"
+}

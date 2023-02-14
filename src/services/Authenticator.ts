@@ -1,5 +1,8 @@
 import * as jwt from 'jsonwebtoken'
 import AuthenticationData from '../model/Authenticator/AuthenticationData'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 class Authenticator {
     generateToken = ({id}: AuthenticationData): string => {
