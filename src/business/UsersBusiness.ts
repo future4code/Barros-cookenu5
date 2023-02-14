@@ -88,7 +88,7 @@ class UsersBusiness {
                 throw new IncorrectPassword()
             }
 
-            const token = authenticatorManager.generateToken(userExisting[0].id)
+            const token = authenticatorManager.generateToken({id: userExisting[0].id})
 
             return token
 
@@ -103,11 +103,7 @@ class UsersBusiness {
                 throw new MissingUserToken()
             }
 
-            console.log(input.token)
-
             const userId = authenticatorManager.getTokenPayload(input.token)
-
-            console.log(userId)
 
             return await usersDatabase.getProfile(userId)
         } catch (err: any) {

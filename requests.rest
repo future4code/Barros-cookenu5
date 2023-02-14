@@ -3,16 +3,16 @@
 ### Get Profile
 GET http://localhost:3306/users/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzYzOTg2MzYsImV4cCI6MTY3NjQwMjIzNn0.zGLIvM5SPyesK2SczEQVdHJ80dPpIXINW70e0cGQOWU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1ZmY2MmUzLWZmNWItNDY0ZC05NzU1LTUxOWVhYzkxNDU0YiIsImlhdCI6MTY3NjQxNTY2OCwiZXhwIjoxNjc2NDE5MjY4fQ.2mNRqQXZm3t7dJKqx2ClG3X6Y-sGpj8kjalQAee_8xE
 
 ### Sign Up
 POST http://localhost:3306/users/signup
 Content-Type: application/json
 
 {
-    "fullName": "Janaina Santos",
-    "email": "janaina@gmail.com",
-    "password": "ghijkl"
+    "fullName": "Cristina Cohen",
+    "email": "cristina@gmail.com",
+    "password": "555555"
 }
 
 ### Login
