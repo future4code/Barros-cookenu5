@@ -9,12 +9,12 @@ class Authenticator {
         const token = jwt.sign(
             { id },
             process.env.JWT_KEY as string,
-            { expiresIn: '24h'}
+            { expiresIn: "1h"}
         )
         return token
     }
 
-    getToken = (token: string): AuthenticationData => {
+    getTokenPayload = (token: string) => {
         const payload = jwt.verify(token, process.env.JWT_KEY as string) as AuthenticationData
         return payload
     }

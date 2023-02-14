@@ -1,6 +1,11 @@
 //-------- Users endpoints --------//
 
-###
+### Get Profile
+GET http://localhost:3306/users/profile
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzYzOTg2MzYsImV4cCI6MTY3NjQwMjIzNn0.zGLIvM5SPyesK2SczEQVdHJ80dPpIXINW70e0cGQOWU
+
+### Sign Up
 POST http://localhost:3306/users/signup
 Content-Type: application/json
 
@@ -9,3 +14,13 @@ Content-Type: application/json
     "email": "janaina@gmail.com",
     "password": "ghijkl"
 }
+
+### Login
+POST http://localhost:3306/users/login
+Content-Type: application/json
+
+{
+    "email": "janaina@gmail.com",
+    "password": "ghijkl"
+}
+

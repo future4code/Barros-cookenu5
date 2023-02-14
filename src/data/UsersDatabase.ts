@@ -1,5 +1,5 @@
+import AuthenticationData from "../model/Authenticator/AuthenticationData";
 import User from "../model/Users/User";
-import { SignUpInputDTO } from "../model/Users/UsersDTO";
 import BaseDatabase from "./BaseDatabase";
 
 class UsersDatabase extends BaseDatabase {
@@ -9,10 +9,16 @@ class UsersDatabase extends BaseDatabase {
         await UsersDatabase.connection(this.TABLE_NAME).insert(newUser)
     }
 
-    findUser = async (input: SignUpInputDTO) => {
-        const result = await UsersDatabase.connection(this.TABLE_NAME).select("*").whereLike("email", input.email)
+    findUser = async (email: string) => {
+        const result = await UsersDatabase.connection(this.TABLE_NAME).select("*").whereLike("email", email)
         return result
     }
+
+    getProfile = async (userId: AuthenticationData) => {
+        const result = await UsersDatabase.connection(this.TABLE_NAME).select("*").whereLike("id", userId.id)
+        return result
+    }
+
 }
 
 export default UsersDatabase
