@@ -5,6 +5,17 @@ import { GetProfileInputDTO, LoginInputDTO, SignUpInputDTO } from "../model/User
 const usersBusiness = new UsersBusiness()
 
 class UsersController {
+
+    getAllUsers = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const users = await usersBusiness.getAllUsers()
+
+            res.status(200).send(users)            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage) 
+        }
+    }
+
     signUp = async (req: Request, res: Response): Promise<void> => {
         try {
             const input: SignUpInputDTO = {

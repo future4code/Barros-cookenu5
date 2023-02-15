@@ -1,5 +1,6 @@
 import UsersDatabase from "../data/UsersDatabase"
 import CustomError from "../errors/CustomError"
+import EmptyList from "../errors/EmptyList"
 import IncorrectPassword from "../errors/UsersErrors/IncorrectPassword"
 import InvalidPassword from "../errors/UsersErrors/InvalidPassword"
 import MissingEmail from "../errors/UsersErrors/MissingEmail"
@@ -22,7 +23,22 @@ const idGenerator = new IdGenerator()
 const hashManager = new HashManager()
 
 class UsersBusiness {
-    signUp = async (input: SignUpInputDTO) => {
+
+    getAllUsers = async (): Promise<User[]> => {
+        try {
+            const users = await usersDatabase.getAllUsers()
+
+            if(users.length < 1){
+                throw new EmptyList()
+            }
+
+            return await usersDatabase.getAllUsers()
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+    signUp = async (input: SignUpInputDTO): Promise<string> => {
         try {
             if(!input.fullName && !input.email && !input.password){
                 throw new MissingInfosSignUp()
@@ -64,7 +80,7 @@ class UsersBusiness {
         }
     }
 
-    login = async (input: LoginInputDTO) => {
+    login = async (input: LoginInputDTO): Promise<string> => {
         try {
             if(!input.email && !input.password){
                 throw new MissingInfosLogin()
@@ -97,7 +113,7 @@ class UsersBusiness {
         }
     }
 
-    getProfile = async (input: GetProfileInputDTO) => {
+    getProfile = async (input: GetProfileInputDTO): Promise<User[]> => {
         try {
             if(!input.token){
                 throw new MissingUserToken()

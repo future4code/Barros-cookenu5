@@ -1,5 +1,9 @@
 //-------- Users endpoints --------//
 
+### Get All Users
+GET http://localhost:3306/users
+Content-Type: application/json
+
 ### Get Profile
 GET http://localhost:3306/users/profile
 Content-Type: application/json
@@ -10,7 +14,7 @@ POST http://localhost:3306/users/signup
 Content-Type: application/json
 
 {
-    "fullName": "Cristina Cohen",
+    "fullName": "",
     "email": "cristina@gmail.com",
     "password": "555555"
 }
@@ -24,3 +28,18 @@ Content-Type: application/json
     "password": "ghijkl"
 }
 
+
+
+
+
+//-------- Recipes endpoints --------//
+
+### Create Recipe
+POST http://localhost:3306/recipes/create
+Content-Type: application/json
+
+{
+    "title": "Cristina Cohen",
+    "description": "cristina@gmail.com",
+    "authorId": "555555"
+}
