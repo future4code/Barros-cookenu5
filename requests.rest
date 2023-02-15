@@ -3,20 +3,26 @@
 ### Get All Users
 GET http://localhost:3306/users
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
 
 ### Get Profile
 GET http://localhost:3306/users/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1ZmY2MmUzLWZmNWItNDY0ZC05NzU1LTUxOWVhYzkxNDU0YiIsImlhdCI6MTY3NjQxNTY2OCwiZXhwIjoxNjc2NDE5MjY4fQ.2mNRqQXZm3t7dJKqx2ClG3X6Y-sGpj8kjalQAee_8xE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
+
+### Get User Profile
+GET http://localhost:3306/users/profile/906b6835-e612-455e-bb5a-86d1607c9696
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
 
 ### Sign Up
 POST http://localhost:3306/users/signup
 Content-Type: application/json
 
 {
-    "fullName": "",
-    "email": "cristina@gmail.com",
-    "password": "555555"
+    "fullName": "Janaina Martins",
+    "email": "janaina@gmail.com",
+    "password": "123456"
 }
 
 ### Login
@@ -37,13 +43,20 @@ Content-Type: application/json
 ### Get All Recipes
 GET http://localhost:3306/recipes
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
+
+### Get Recipe
+GET http://localhost:3306/recipes/:recipe_id
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
 
 ### Create Recipe
 POST http://localhost:3306/recipes/create
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjM2Q1ZmE3LTgyZjEtNDYzNy05N2E2LWI5M2NiMDg0ZDUwNyIsImlhdCI6MTY3NjQ2MTY5OCwiZXhwIjoxNjc2NTQ4MDk4fQ.YYAn2Jqup9UCHky4PitvGpIcbiPN-fff2knn4fTX7Mk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
 
 {
     "title": "Feijoada",
     "description": "Eu amo."
 }
+

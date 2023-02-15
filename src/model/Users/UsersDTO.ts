@@ -12,3 +12,12 @@ export interface LoginInputDTO {
 export interface GetProfileInputDTO {
     token: string
 }
+
+export interface GetUserProfileInputDTO {
+    userId: string,
+    token: string
+}
+
+export interface TokenInputDTO {
+    token: string
+}

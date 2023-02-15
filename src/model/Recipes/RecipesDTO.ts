@@ -3,3 +3,8 @@ export interface CreateRecipeInputDTO {
     description: string,
     token: string
 }
+
+export interface GetRecipeInputDTO {
+    recipeId: string,
+    token: string
+}

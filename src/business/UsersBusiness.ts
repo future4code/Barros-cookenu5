@@ -8,11 +8,12 @@ import MissingFullName from "../errors/UsersErrors/MissingFullName"
 import MissingInfosLogin from "../errors/UsersErrors/MissingInfosLogin"
 import MissingInfosSignUp from "../errors/UsersErrors/MissingInfosSignUp"
 import MissingPassword from "../errors/UsersErrors/MissingPassword"
+import MissingUserId from "../errors/UsersErrors/MissingUserId"
 import MissingUserToken from "../errors/UsersErrors/MissingUserToken"
 import UserExisting from "../errors/UsersErrors/UserExisting"
 import UserNotFound from "../errors/UsersErrors/UserNotFound"
 import User from "../model/Users/User"
-import { GetProfileInputDTO, LoginInputDTO, SignUpInputDTO } from "../model/Users/UsersDTO"
+import { GetProfileInputDTO, GetUserProfileInputDTO, LoginInputDTO, SignUpInputDTO, TokenInputDTO } from "../model/Users/UsersDTO"
 import Authenticator from "../services/Authenticator"
 import HashManager from "../services/HashManager"
 import IdGenerator from "../services/IdGenerator"
@@ -24,13 +25,19 @@ const hashManager = new HashManager()
 
 class UsersBusiness {
 
-    getAllUsers = async (): Promise<User[]> => {
+    getAllUsers = async (input: TokenInputDTO): Promise<User[]> => {
         try {
+            if(!input.token){
+                throw new MissingUserToken()
+            }
+
             const users = await usersDatabase.getAllUsers()
 
             if(users.length < 1){
                 throw new EmptyList()
             }
+
+            authenticatorManager.getTokenPayload(input.token)
 
             return await usersDatabase.getAllUsers()
         } catch (err: any) {
@@ -119,9 +126,25 @@ class UsersBusiness {
                 throw new MissingUserToken()
             }
 
-            const userId = authenticatorManager.getTokenPayload(input.token)
+            const userIdByToken = authenticatorManager.getTokenPayload(input.token)
 
-            return await usersDatabase.getProfile(userId)
+            return await usersDatabase.getProfile(userIdByToken)
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+    getUserProfile = async (input: GetUserProfileInputDTO): Promise<User[]> => {
+        try {
+            if(!input.token){
+                throw new MissingUserToken()
+            } if(input.userId === ":user_id"){
+                throw new MissingUserId()
+            }
+
+            authenticatorManager.getTokenPayload(input.token)
+
+            return await usersDatabase.getUserProfile(input)
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }

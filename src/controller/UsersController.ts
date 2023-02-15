@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import UsersBusiness from "../business/UsersBusiness"
-import { GetProfileInputDTO, LoginInputDTO, SignUpInputDTO } from "../model/Users/UsersDTO"
+import { GetProfileInputDTO, GetUserProfileInputDTO, LoginInputDTO, SignUpInputDTO, TokenInputDTO } from "../model/Users/UsersDTO"
 
 const usersBusiness = new UsersBusiness()
 
@@ -8,7 +8,11 @@ class UsersController {
 
     getAllUsers = async (req: Request, res: Response): Promise<void> => {
         try {
-            const users = await usersBusiness.getAllUsers()
+            const input: TokenInputDTO = {
+                token: req.headers.authorization as string
+            }
+
+            const users = await usersBusiness.getAllUsers(input)
 
             res.status(200).send(users)            
         } catch (err: any) {
@@ -54,6 +58,21 @@ class UsersController {
             }
             
             const userProfile = await usersBusiness.getProfile(input)
+
+            res.status(200).send(userProfile)
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage) 
+        }
+    }
+
+    getUserProfile = async (req: Request, res: Response): Promise<void>  => {
+        try {
+            const input: GetUserProfileInputDTO = {
+                userId: req.params.user_id,
+                token: req.headers.authorization as string
+            }
+            
+            const userProfile = await usersBusiness.getUserProfile(input)
 
             res.status(200).send(userProfile)
         } catch (err: any) {

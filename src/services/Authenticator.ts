@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken'
 import AuthenticationData from '../model/Authenticator/AuthenticationData'
 import dotenv from 'dotenv'
+import CustomError from '../errors/CustomError'
 
 dotenv.config()
 
@@ -15,7 +16,11 @@ class Authenticator {
     }
 
     getTokenPayload = (token: string): AuthenticationData => {
-        return jwt.verify(token, process.env.JWT_KEY as string) as AuthenticationData
+        try {
+            return jwt.verify(token, process.env.JWT_KEY as string) as AuthenticationData            
+        } catch (err: any) {
+            throw new CustomError(401, `Unauthorized - ${err.message}.`)            
+        }
     }
 }
 

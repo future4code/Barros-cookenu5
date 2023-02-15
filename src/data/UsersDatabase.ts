@@ -1,5 +1,6 @@
 import AuthenticationData from "../model/Authenticator/AuthenticationData";
 import User from "../model/Users/User";
+import { GetUserProfileInputDTO } from "../model/Users/UsersDTO";
 import BaseDatabase from "./BaseDatabase";
 
 class UsersDatabase extends BaseDatabase {
@@ -19,8 +20,13 @@ class UsersDatabase extends BaseDatabase {
         return user
     }
 
-    getProfile = async (userId: AuthenticationData) => {
-        const profile = await UsersDatabase.connection(this.TABLE_NAME).select("*").whereLike("id", userId.id)
+    getProfile = async (userIdByToken: AuthenticationData) => {
+        const profile = await UsersDatabase.connection(this.TABLE_NAME).select("*").whereLike("id", userIdByToken.id)
+        return profile
+    }
+
+    getUserProfile = async (input: GetUserProfileInputDTO) => {
+        const profile = await UsersDatabase.connection(this.TABLE_NAME).select("*").whereLike("id", input.userId)
         return profile
     }
 
