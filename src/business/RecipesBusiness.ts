@@ -1,15 +1,18 @@
 import RecipesDatabase from "../data/RecipesDatabase"
+import UsersDatabase from "../data/UsersDatabase"
 import CustomError from "../errors/CustomError"
 import MissingAuthorId from "../errors/RecipesErrors/MissingAuthorId"
 import MissingDescription from "../errors/RecipesErrors/MissingDescription"
 import MissingInfosCreate from "../errors/RecipesErrors/MissingInfosCreate"
 import MissingTitle from "../errors/RecipesErrors/MissingTitle"
 import RecipeExisting from "../errors/RecipesErrors/RecipeExisting"
+import UserNotFound from "../errors/UsersErrors/UserNotFound"
 import Recipe from "../model/Recipes/Recipe"
 import { CreateRecipeInputDTO } from "../model/Recipes/RecipesDTO"
 import IdGenerator from "../services/IdGenerator"
 
 const recipesDatabase = new RecipesDatabase()
+const usersDatabase = new UsersDatabase()
 const idGenerator = new IdGenerator()
 
 class RecipesBusiness {
@@ -29,6 +32,13 @@ class RecipesBusiness {
 
             if(recipeExisting.length > 0){
                 throw new RecipeExisting()
+            }
+
+            const users = await usersDatabase.getAllUsers()
+            const userExisting = users.filter(user => user.id === input.authorId)
+
+            if(userExisting.length < 1){
+                throw new UserNotFound()
             }
 
             const id = idGenerator.idGenerator()
