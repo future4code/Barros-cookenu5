@@ -21,7 +21,7 @@ class RecipesController {
             const input: CreateRecipeInputDTO = {
                 title: req.body.title,
                 description: req.body.description,
-                authorId: req.body.authorId
+                token: req.headers.authorization as string
             }
 
             await recipesBusiness.createRecipe(input)

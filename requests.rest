@@ -24,8 +24,8 @@ POST http://localhost:3306/users/login
 Content-Type: application/json
 
 {
-    "email": "janaina@gmail.com",
-    "password": "ghijkl"
+    "email": "gioivieira@gmail.com",
+    "password": "123456"
 }
 
 
@@ -41,9 +41,9 @@ Content-Type: application/json
 ### Create Recipe
 POST http://localhost:3306/recipes/create
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjM2Q1ZmE3LTgyZjEtNDYzNy05N2E2LWI5M2NiMDg0ZDUwNyIsImlhdCI6MTY3NjQ2MTY5OCwiZXhwIjoxNjc2NTQ4MDk4fQ.YYAn2Jqup9UCHky4PitvGpIcbiPN-fff2knn4fTX7Mk
 
 {
-    "title": "Risoto",
-    "description": "Eu amo.",
-    "authorId": "28cc840a-6a6e-420f-86fc-e30ec9acc0b4"
+    "title": "Feijoada",
+    "description": "Eu amo."
 }

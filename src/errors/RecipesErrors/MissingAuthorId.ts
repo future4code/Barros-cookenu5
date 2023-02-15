@@ -1,9 +1,9 @@
 import CustomError from "../CustomError";
 
-class MissingAuthorId extends CustomError {
+class MissingAuthorToken extends CustomError {
     constructor(){
-        super(422, "Recipe author id required.")
+        super(422, "Author token required.")
     }
 }
 
-export default MissingAuthorId
+export default MissingAuthorToken
