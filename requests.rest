@@ -34,6 +34,10 @@ Content-Type: application/json
 
 //-------- Recipes endpoints --------//
 
+### Get All Recipes
+GET http://localhost:3306/recipes
+Content-Type: application/json
+
 ### Create Recipe
 POST http://localhost:3306/recipes/create
 Content-Type: application/json

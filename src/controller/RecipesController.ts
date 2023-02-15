@@ -5,6 +5,17 @@ import { CreateRecipeInputDTO } from "../model/Recipes/RecipesDTO"
 const recipesBusiness = new RecipesBusiness()
 
 class RecipesController {
+
+    getAllRecipes = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const recipes = await recipesBusiness.getAllRecipes()
+
+            res.status(200).send(recipes)            
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage) 
+        }
+    }
+
     createRecipe = async (req: Request, res: Response): Promise<void> => {
         try {
             const input: CreateRecipeInputDTO = {

@@ -1,6 +1,7 @@
 import RecipesDatabase from "../data/RecipesDatabase"
 import UsersDatabase from "../data/UsersDatabase"
 import CustomError from "../errors/CustomError"
+import EmptyList from "../errors/EmptyList"
 import MissingAuthorId from "../errors/RecipesErrors/MissingAuthorId"
 import MissingDescription from "../errors/RecipesErrors/MissingDescription"
 import MissingInfosCreate from "../errors/RecipesErrors/MissingInfosCreate"
@@ -16,6 +17,21 @@ const usersDatabase = new UsersDatabase()
 const idGenerator = new IdGenerator()
 
 class RecipesBusiness {
+
+    getAllRecipes = async (): Promise<Recipe[]> => {
+        try {
+            const recipes = await recipesDatabase.getAllRecipes()
+
+            if(recipes.length < 1){
+                throw new EmptyList()
+            }
+
+            return await recipesDatabase.getAllRecipes()
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
     createRecipe = async (input: CreateRecipeInputDTO): Promise<void> => {
         try {
             if(!input.title && !input.description && !input.authorId){
