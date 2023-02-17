@@ -3,25 +3,25 @@
 ### Get All Users
 GET http://localhost:3306/users
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjYzODM4MCwiZXhwIjoxNjc2NzI0NzgwfQ.aSQlqFtFHwFYoG2lRm89FPUvYlbt87tvlqxXxVCh9XQ
 
 ### Get Profile
 GET http://localhost:3306/users/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjYzODM4MCwiZXhwIjoxNjc2NzI0NzgwfQ.aSQlqFtFHwFYoG2lRm89FPUvYlbt87tvlqxXxVCh9XQ
 
 ### Get User Profile
 GET http://localhost:3306/users/profile/906b6835-e612-455e-bb5a-86d1607c9696
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjYzODM4MCwiZXhwIjoxNjc2NzI0NzgwfQ.aSQlqFtFHwFYoG2lRm89FPUvYlbt87tvlqxXxVCh9XQ
 
 ### Sign Up
 POST http://localhost:3306/users/signup
 Content-Type: application/json
 
 {
-    "fullName": "Janaina Martins",
-    "email": "janaina@gmail.com",
+    "fullName": "Maria Silva",
+    "email": "maria@gmail.com",
     "password": "123456"
 }
 
@@ -43,20 +43,39 @@ Content-Type: application/json
 ### Get All Recipes
 GET http://localhost:3306/recipes
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjYzODM4MCwiZXhwIjoxNjc2NzI0NzgwfQ.aSQlqFtFHwFYoG2lRm89FPUvYlbt87tvlqxXxVCh9XQ
 
 ### Get Recipe
 GET http://localhost:3306/recipes/:recipe_id
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjYzODM4MCwiZXhwIjoxNjc2NzI0NzgwfQ.aSQlqFtFHwFYoG2lRm89FPUvYlbt87tvlqxXxVCh9XQ
 
 ### Create Recipe
 POST http://localhost:3306/recipes/create
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjQ2MjE4NiwiZXhwIjoxNjc2NTQ4NTg2fQ.k3dKJcOlRYEy_d7ZlMNbLrQcdGDPeRjJCdCbte9OUHQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjYzODM4MCwiZXhwIjoxNjc2NzI0NzgwfQ.aSQlqFtFHwFYoG2lRm89FPUvYlbt87tvlqxXxVCh9XQ
 
 {
     "title": "Feijoada",
     "description": "Eu amo."
 }
 
+
+
+
+
+//-------- Follows endpoints --------//
+
+### Get All Follows
+GET http://localhost:3306/follows
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NjYzODM4MCwiZXhwIjoxNjc2NzI0NzgwfQ.aSQlqFtFHwFYoG2lRm89FPUvYlbt87tvlqxXxVCh9XQ
+
+### Follow User
+POST http://localhost:3306/follows
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NWNlOGJlLTliNTAtNGE2NS1iZGYwLWUwNWNlYzVkZDVjMyIsImlhdCI6MTY3NjY0MDE5MSwiZXhwIjoxNjc2NzI2NTkxfQ.uh7m949_9rFm30pbZra9j9xoeA34_kD7HuDm0aDfVO0
+
+{
+    "userToFollowId": "051922ce-6d0d-4bde-b0a3-d6dde1bf047f"
+}

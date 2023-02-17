@@ -7,7 +7,6 @@ import MissingDescription from "../errors/RecipesErrors/MissingDescription"
 import MissingInfosCreate from "../errors/RecipesErrors/MissingInfosCreate"
 import MissingRecipeId from "../errors/RecipesErrors/MissingRecipeId"
 import MissingTitle from "../errors/RecipesErrors/MissingTitle"
-import RecipeExisting from "../errors/RecipesErrors/RecipeExisting"
 import RecipeNotFound from "../errors/RecipesErrors/RecipeNotFound"
 import MissingUserToken from "../errors/UsersErrors/MissingUserToken"
 import UserNotFound from "../errors/UsersErrors/UserNotFound"
@@ -89,10 +88,8 @@ class RecipesBusiness {
                 throw new UserNotFound()
             }
 
-            const id = idGenerator.idGenerator()
-
             const newRecipe = new Recipe(
-                id, 
+                idGenerator.idGenerator(), 
                 input.title,
                 input.description,
                 new Date(),
