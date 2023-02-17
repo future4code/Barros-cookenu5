@@ -8,3 +8,5 @@ const followsController = new FollowsController()
 followsRouter.get("/", followsController.getAllFollows)
 
 followsRouter.post("/", followsController.followUser)
+
+followsRouter.delete("/delete", followsController.unfollowUser)

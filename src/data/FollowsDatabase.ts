@@ -1,4 +1,6 @@
+import AuthenticationData from "../model/Authenticator/AuthenticationData";
 import Follow from "../model/Follows/Follow";
+import { UnfollowUserInputDTO } from "../model/Follows/FollowsDTO";
 import BaseDatabase from "./BaseDatabase";
 
 class FollowsDatabase extends BaseDatabase {
@@ -10,6 +12,10 @@ class FollowsDatabase extends BaseDatabase {
 
     insertFollow = async (newFollow: Follow) => {
         await FollowsDatabase.connection(this.TABLE_NAME).insert(newFollow)
+    }
+
+    deleteFollow = async (input: UnfollowUserInputDTO, userId: AuthenticationData) => {
+        await FollowsDatabase.connection(this.TABLE_NAME).whereLike("followed_user", input.userToUnfollowId).andWhereLike("user_id", userId.id).del()
     }
 }
 

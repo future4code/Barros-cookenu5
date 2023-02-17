@@ -8,10 +8,13 @@ import MissingUserToFollowId from "../errors/FollowsErrors/MissingUserToFollowId
 import MissingUserToken from "../errors/UsersErrors/MissingUserToken"
 import UserNotFound from "../errors/UsersErrors/UserNotFound"
 import Follow from "../model/Follows/Follow"
-import { FollowUserInputDTO } from "../model/Follows/FollowsDTO"
+import { FollowUserInputDTO, UnfollowUserInputDTO } from "../model/Follows/FollowsDTO"
 import { TokenInputDTO } from "../model/Users/UsersDTO"
 import Authenticator from "../services/Authenticator"
 import IdGenerator from "../services/IdGenerator"
+import MissingInfosUnfollowUser from "../errors/FollowsErrors/MissingInfosUnfollowUser copy"
+import MissingUserToUnfollowId from "../errors/FollowsErrors/MissingUserToUnfollowId copy"
+import UserNotFollowed from "../errors/FollowsErrors/UserNotFollowed"
 
 const followsDatabase = new FollowsDatabase()
 const usersDatabase = new UsersDatabase()
@@ -74,6 +77,38 @@ class FollowsBusiness {
             
             await followsDatabase.insertFollow(newFollow)
 
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+    unfollowUser = async (input: UnfollowUserInputDTO) => {
+        try {
+            if(!input.token && !input.userToUnfollowId){
+                throw new MissingInfosUnfollowUser()
+            } if(!input.token){
+                throw new MissingUserToken()
+            } if(!input.userToUnfollowId){
+                throw new MissingUserToUnfollowId()
+            }
+
+            const users = await usersDatabase.getAllUsers()
+            const userExisting = users.filter(user => user.id === input.userToUnfollowId)
+
+            const userId = await authenticatorManager.getTokenPayload(input.token)
+
+            if(userExisting.length < 1){
+                throw new UserNotFound
+            } 
+            
+            const follows = await followsDatabase.getAllFollows()
+            const userFollowed = follows.filter(follow => follow.user_id === userId.id && follow.followed_user === input.userToUnfollowId)
+            
+            if(userFollowed.length < 1){
+                throw new UserNotFollowed()
+            }            
+            
+            await followsDatabase.deleteFollow(input, userId)
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }

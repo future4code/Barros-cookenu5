@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import FollowsBusiness from "../business/FollowsBusiness"
-import { FollowUserInputDTO } from "../model/Follows/FollowsDTO"
+import { FollowUserInputDTO, UnfollowUserInputDTO } from "../model/Follows/FollowsDTO"
 import { TokenInputDTO } from "../model/Users/UsersDTO"
 
 const followsBusiness = new FollowsBusiness()
@@ -35,6 +35,22 @@ class FollowsController {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
         }
     }
+
+    unfollowUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const input: UnfollowUserInputDTO = {
+                userToUnfollowId: req.body.userToFollowId,
+                token: req.headers.authorization as string
+            }
+
+            await followsBusiness.unfollowUser(input)
+
+            res.status(200).send("User unfollowed.")
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
+
 
 }
 
