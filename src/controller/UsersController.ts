@@ -79,6 +79,20 @@ class UsersController {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage) 
         }
     }
+
+    getUserFeed = async (req: Request, res: Response) => {
+        try {
+            const input: TokenInputDTO = {
+                token: req.headers.authorization as string
+            }
+
+            const feed = await usersBusiness.getUserFeed(input)
+
+            res.status(200).send(feed)
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
 }
 
 export default UsersController

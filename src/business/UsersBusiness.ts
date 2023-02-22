@@ -149,6 +149,20 @@ class UsersBusiness {
             throw new CustomError(err.statusCode, err.message)
         }
     }
+
+    getUserFeed = async (input: TokenInputDTO) => {
+        try {
+            if(!input.token){
+                throw new MissingUserToken()
+            }
+
+            const userId = await authenticatorManager.getTokenPayload(input.token)
+
+            return await usersDatabase.getUserFeed(userId)
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }
+    }
 }
 
 export default UsersBusiness

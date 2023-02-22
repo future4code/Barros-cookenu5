@@ -5,6 +5,11 @@ GET http://localhost:3306/users
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NzA4NjkyNSwiZXhwIjoxNjc3MTczMzI1fQ.VcrRftCwqbhHRANTxhBue1W9BVCKmy0wH49WzdqiC3o
 
+### Get User Feed
+GET http://localhost:3306/users/feed
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NzA4OTY1NCwiZXhwIjoxNjc3MTc2MDU0fQ.39aIDe3nsduSjAj9KEixA3i_agfM0vntjbONmpNjpM0
+
 ### Get Profile
 GET http://localhost:3306/users/profile
 Content-Type: application/json
@@ -53,11 +58,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQt
 ### Create Recipe
 POST http://localhost:3306/recipes/create
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA1MTkyMmNlLTZkMGQtNGJkZS1iMGEzLWQ2ZGRlMWJmMDQ3ZiIsImlhdCI6MTY3NzA4NjkyNSwiZXhwIjoxNjc3MTczMzI1fQ.VcrRftCwqbhHRANTxhBue1W9BVCKmy0wH49WzdqiC3o
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NWNlOGJlLTliNTAtNGE2NS1iZGYwLWUwNWNlYzVkZDVjMyIsImlhdCI6MTY3NzA4OTU4MiwiZXhwIjoxNjc3MTc1OTgyfQ.YNmY-6qd3cnUs0MqcSy-00odpvt7cnREUWss1eTuCfI
 
 {
-    "title": "Feijoada",
-    "description": "Eu amo."
+    "title": "Arroz doce",
+    "description": "Tudoh."
 }
 
 

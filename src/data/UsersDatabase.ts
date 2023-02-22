@@ -30,6 +30,17 @@ class UsersDatabase extends BaseDatabase {
         return profile
     }
 
+    getUserFeed = async (userId: AuthenticationData) => {
+        const feed = await UsersDatabase.connection("cookenu_recipes")
+        .select("cookenu_recipes.id", 
+        "cookenu_recipes.title", 
+        "cookenu_recipes.description", 
+        "cookenu_recipes.created_at",
+        "cookenu_recipes.author_id")
+        .join("cookenu_follows", "cookenu_follows.followed_user", "cookenu_recipes.author_id")
+        .whereLike("cookenu_follows.user_id", userId.id)
+        return feed
+    }
 }
 
 export default UsersDatabase
