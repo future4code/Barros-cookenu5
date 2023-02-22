@@ -15,6 +15,7 @@ import IdGenerator from "../services/IdGenerator"
 import MissingInfosUnfollowUser from "../errors/FollowsErrors/MissingInfosUnfollowUser copy"
 import MissingUserToUnfollowId from "../errors/FollowsErrors/MissingUserToUnfollowId copy"
 import UserNotFollowed from "../errors/FollowsErrors/UserNotFollowed"
+import OwnUser from "../errors/FollowsErrors/OwnUser"
 
 const followsDatabase = new FollowsDatabase()
 const usersDatabase = new UsersDatabase()
@@ -59,14 +60,18 @@ class FollowsBusiness {
             const userId = await authenticatorManager.getTokenPayload(input.token)
 
             if(userExisting.length < 1){
-                throw new UserNotFound
+                throw new UserNotFound()
             } 
+
+            if(input.userToFollowId === userId.id){
+                throw new OwnUser()
+            }
             
             const follows = await followsDatabase.getAllFollows()
             const userAlreadyFollowed = follows.filter(follow => follow.user_id === userId.id && follow.followed_user === input.userToFollowId)
             
             if(userAlreadyFollowed.length > 0){
-                throw new UserAlreadyFollowed
+                throw new UserAlreadyFollowed()
             }            
 
             const newFollow = new Follow(
@@ -98,7 +103,7 @@ class FollowsBusiness {
             const userId = await authenticatorManager.getTokenPayload(input.token)
 
             if(userExisting.length < 1){
-                throw new UserNotFound
+                throw new UserNotFound()
             } 
             
             const follows = await followsDatabase.getAllFollows()
