@@ -1,27 +1,27 @@
 //-------- Users endpoints --------//
 
 ### Get All Users
-GET http://localhost:3306/users
+GET https://cookenu-zy3y.onrender.com/users
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyODQzYjU2LWRjNWMtNDA2MS04MTFmLTk1N2E5ZmZlZDc1NyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUxNjI4NiwiZXhwIjoxNjc3NjAyNjg2fQ.EDNyysKLMtPeu7Zsy32oGMgf3m7KNww0d9gsr3mfEGE
 
 ### Get User Feed
-GET http://localhost:3306/users/feed
+GET https://cookenu-zy3y.onrender.com/users/feed
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyODQzYjU2LWRjNWMtNDA2MS04MTFmLTk1N2E5ZmZlZDc1NyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUxNjc2OSwiZXhwIjoxNjc3NjAzMTY5fQ.Pnz2Fbl_Tt0FQGOGbuEpgHDYcynUBbWMGThELmiIXs0
 
 ### Get Profile
-GET http://localhost:3306/users/profile
+GET https://cookenu-zy3y.onrender.com/users/profile
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyODQzYjU2LWRjNWMtNDA2MS04MTFmLTk1N2E5ZmZlZDc1NyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUxNjI4NiwiZXhwIjoxNjc3NjAyNjg2fQ.EDNyysKLMtPeu7Zsy32oGMgf3m7KNww0d9gsr3mfEGE
 
 ### Get User Profile
-GET http://localhost:3306/users/profile/:user_id
+GET https://cookenu-zy3y.onrender.com/users/profile/:user_id
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyODQzYjU2LWRjNWMtNDA2MS04MTFmLTk1N2E5ZmZlZDc1NyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUxNjI4NiwiZXhwIjoxNjc3NjAyNjg2fQ.EDNyysKLMtPeu7Zsy32oGMgf3m7KNww0d9gsr3mfEGE
 
 ### Sign Up
-POST http://localhost:3306/users/signup
+POST https://cookenu-zy3y.onrender.com/users/signup
 Content-Type: application/json
 
 {
@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 ### Login
-POST http://localhost:3306/users/login
+POST https://cookenu-zy3y.onrender.com/users/login
 Content-Type: application/json
 
 {
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 ### Delete User
-DELETE http://localhost:3306/users/delete/:user_id
+DELETE https://cookenu-zy3y.onrender.com/users/delete/:user_id
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDNlNmJhLTRjYTQtNGFiOS1hYTE0LTZhNzcwZDc3ZDc5ZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUyMzAzNCwiZXhwIjoxNjc3NjA5NDM0fQ.SeEeAiftCBsbd1VkAbm0Xh-WggfqP_OkSEKmLPZ90us
 
@@ -53,17 +53,17 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDNlNmJhLTRjYTQt
 //-------- Recipes endpoints --------//
 
 ### Get All Recipes
-GET http://localhost:3306/recipes
+GET https://cookenu-zy3y.onrender.com/recipes
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyODQzYjU2LWRjNWMtNDA2MS04MTFmLTk1N2E5ZmZlZDc1NyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUxNjI4NiwiZXhwIjoxNjc3NjAyNjg2fQ.EDNyysKLMtPeu7Zsy32oGMgf3m7KNww0d9gsr3mfEGE
 
 ### Get Recipe
-GET http://localhost:3306/recipes/:recipe_id
+GET https://cookenu-zy3y.onrender.com/recipes/:recipe_id
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyODQzYjU2LWRjNWMtNDA2MS04MTFmLTk1N2E5ZmZlZDc1NyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUxNjI4NiwiZXhwIjoxNjc3NjAyNjg2fQ.EDNyysKLMtPeu7Zsy32oGMgf3m7KNww0d9gsr3mfEGE
 
 ### Create Recipe
-POST http://localhost:3306/recipes/create
+POST https://cookenu-zy3y.onrender.com/recipes/create
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI1ZWU4NDU5LTFhMTEtNDBmZi1iYzI1LWQyZWU4OTU2MTIxNyIsInJvbGUiOiJub3JtYWwiLCJpYXQiOjE2Nzc1MjM3NjAsImV4cCI6MTY3NzYxMDE2MH0.dsz9kG0wpIaL61NloRKQ_A9XFcqXMt27apPCahVrLX8
 
@@ -73,7 +73,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI1ZWU4NDU5LTFhMTEt
 }
 
 ### Edit Recipe
-PATCH http://localhost:3306/recipes/edit/:recipe_id
+PATCH https://cookenu-zy3y.onrender.com/recipes/edit/:recipe_id
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNGQ3ZjVhLTFmOTMtNDFkMy1iOTUyLTJlNjBiY2MxYWVmMCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzc1MTkzNjQsImV4cCI6MTY3NzYwNTc2NH0.P1c8TLrkzWcHoB1N1DPQH6drmV5lO3ARtEHuZdWYkEU
 
@@ -83,7 +83,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNGQ3ZjVhLTFmOTMt
 }
 
 ### Delete Recipe
-DELETE http://localhost:3306/recipes/delete/:recipe_id
+DELETE https://cookenu-zy3y.onrender.com/recipes/delete/:recipe_id
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNGQ3ZjVhLTFmOTMtNDFkMy1iOTUyLTJlNjBiY2MxYWVmMCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2Nzc1MjA2NzQsImV4cCI6MTY3NzYwNzA3NH0.gc4EIQ_uk4RGxxraghJ00YSgFL7Tb7vLznTlvo-nH5k
 
@@ -95,12 +95,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzNGQ3ZjVhLTFmOTMt
 //-------- Follows endpoints --------//
 
 ### Get All Follows
-GET http://localhost:3306/follows
+GET https://cookenu-zy3y.onrender.com/follows
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyODQzYjU2LWRjNWMtNDA2MS04MTFmLTk1N2E5ZmZlZDc1NyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUxNjI4NiwiZXhwIjoxNjc3NjAyNjg2fQ.EDNyysKLMtPeu7Zsy32oGMgf3m7KNww0d9gsr3mfEGE
 
 ### Follow User
-POST http://localhost:3306/follows
+POST https://cookenu-zy3y.onrender.com/follows
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI1ZWU4NDU5LTFhMTEtNDBmZi1iYzI1LWQyZWU4OTU2MTIxNyIsInJvbGUiOiJub3JtYWwiLCJpYXQiOjE2Nzc1MjM3NjAsImV4cCI6MTY3NzYxMDE2MH0.dsz9kG0wpIaL61NloRKQ_A9XFcqXMt27apPCahVrLX8
 
@@ -109,7 +109,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI1ZWU4NDU5LTFhMTEt
 }
 
 ### Unfollow User
-DELETE http://localhost:3306/follows/delete
+DELETE https://cookenu-zy3y.onrender.com/follows/delete
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYyODQzYjU2LWRjNWMtNDA2MS04MTFmLTk1N2E5ZmZlZDc1NyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzUxNjI4NiwiZXhwIjoxNjc3NjAyNjg2fQ.EDNyysKLMtPeu7Zsy32oGMgf3m7KNww0d9gsr3mfEGE
 
