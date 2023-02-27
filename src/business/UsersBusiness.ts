@@ -3,17 +3,20 @@ import CustomError from "../errors/CustomError"
 import EmptyList from "../errors/EmptyList"
 import IncorrectPassword from "../errors/UsersErrors/IncorrectPassword"
 import InvalidPassword from "../errors/UsersErrors/InvalidPassword"
+import InvalidRole from "../errors/UsersErrors/InvalidRole"
 import MissingEmail from "../errors/UsersErrors/MissingEmail"
 import MissingFullName from "../errors/UsersErrors/MissingFullName"
 import MissingInfosLogin from "../errors/UsersErrors/MissingInfosLogin"
 import MissingInfosSignUp from "../errors/UsersErrors/MissingInfosSignUp"
 import MissingPassword from "../errors/UsersErrors/MissingPassword"
+import MissingRole from "../errors/UsersErrors/MissingRole"
 import MissingUserId from "../errors/UsersErrors/MissingUserId"
 import MissingUserToken from "../errors/UsersErrors/MissingUserToken"
+import NotAdminUser from "../errors/UsersErrors/NotAdminUser"
 import UserExisting from "../errors/UsersErrors/UserExisting"
 import UserNotFound from "../errors/UsersErrors/UserNotFound"
 import User from "../model/Users/User"
-import { GetProfileInputDTO, GetUserProfileInputDTO, LoginInputDTO, SignUpInputDTO, TokenInputDTO } from "../model/Users/UsersDTO"
+import { DeleteUserInputDTO, GetProfileInputDTO, GetUserProfileInputDTO, LoginInputDTO, SignUpInputDTO, TokenInputDTO } from "../model/Users/UsersDTO"
 import Authenticator from "../services/Authenticator"
 import HashManager from "../services/HashManager"
 import IdGenerator from "../services/IdGenerator"
@@ -47,7 +50,7 @@ class UsersBusiness {
 
     signUp = async (input: SignUpInputDTO): Promise<string> => {
         try {
-            if(!input.fullName && !input.email && !input.password){
+            if(!input.fullName && !input.email && !input.password && !input.role){
                 throw new MissingInfosSignUp()
             } if(!input.fullName){
                 throw new MissingFullName()
@@ -55,8 +58,12 @@ class UsersBusiness {
                 throw new MissingEmail()
             } if(!input.password){
                 throw new MissingPassword()
+            } if(!input.role){
+                throw new MissingRole()
             } if(input.password.length < 6){
                 throw new InvalidPassword()
+            } if(input.role.toUpperCase() !== "ADMIN" && input.role.toUpperCase() !== "NORMAL"){
+                throw new InvalidRole()
             }
 
             const userExisting = await usersDatabase.findUser(input.email)
@@ -73,12 +80,13 @@ class UsersBusiness {
                 id,
                 input.fullName,
                 input.email, 
-                hashPassword
+                hashPassword,
+                input.role.toUpperCase()
             )
             
             await usersDatabase.insertUser(newUser)
 
-            const token = authenticatorManager.generateToken({id})
+            const token = authenticatorManager.generateToken({id, role: input.role})
 
             return token
 
@@ -111,7 +119,7 @@ class UsersBusiness {
                 throw new IncorrectPassword()
             }
 
-            const token = authenticatorManager.generateToken({id: userExisting[0].id})
+            const token = authenticatorManager.generateToken({id: userExisting[0].id, role: userExisting[0].role})
 
             return token
 
@@ -126,9 +134,9 @@ class UsersBusiness {
                 throw new MissingUserToken()
             }
 
-            const userIdByToken = authenticatorManager.getTokenPayload(input.token)
+            const userData = authenticatorManager.getTokenPayload(input.token)
 
-            return await usersDatabase.getProfile(userIdByToken)
+            return await usersDatabase.getProfile(userData)
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }
@@ -156,11 +164,36 @@ class UsersBusiness {
                 throw new MissingUserToken()
             }
 
-            const userId = await authenticatorManager.getTokenPayload(input.token)
+            const userData = await authenticatorManager.getTokenPayload(input.token)
 
-            return await usersDatabase.getUserFeed(userId)
+            return await usersDatabase.getUserFeed(userData)
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
+        }
+    }
+
+    deleteUser = async (input: DeleteUserInputDTO) => {
+
+        if(!input.token){
+            throw new MissingUserToken()
+        } if(input.userId === ":user_id"){
+            throw new MissingUserId()
+        }
+
+        const userData = authenticatorManager.getTokenPayload(input.token)
+
+        const allUsers = await usersDatabase.getAllUsers()
+
+        const userExisting = allUsers.filter(user => user.id === input.userId)
+
+        if(userExisting.length < 1){
+            throw new UserNotFound()
+        }
+
+        if(userData.role === "ADMIN"){
+            await usersDatabase.deleteUser(input)
+        } else {
+            throw new NotAdminUser()
         }
     }
 }

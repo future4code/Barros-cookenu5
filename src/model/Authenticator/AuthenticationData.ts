@@ -1,5 +1,6 @@
 interface AuthenticationData {
-    id: string
+    id: string,
+    role: string
 }
 
 export default AuthenticationData

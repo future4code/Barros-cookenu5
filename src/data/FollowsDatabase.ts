@@ -14,8 +14,8 @@ class FollowsDatabase extends BaseDatabase {
         await FollowsDatabase.connection(this.TABLE_NAME).insert(newFollow)
     }
 
-    deleteFollow = async (input: UnfollowUserInputDTO, userId: AuthenticationData) => {
-        await FollowsDatabase.connection(this.TABLE_NAME).whereLike("followed_user", input.userToUnfollowId).andWhereLike("user_id", userId.id).del()
+    deleteFollow = async (input: UnfollowUserInputDTO, userData: AuthenticationData) => {
+        await FollowsDatabase.connection(this.TABLE_NAME).whereLike("followed_user", input.userToUnfollowId).andWhereLike("user_id", userData.id).del()
     }
 }
 

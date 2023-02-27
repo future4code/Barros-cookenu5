@@ -16,3 +16,5 @@ usersRouter.get("/profile/:user_id", usersController.getUserProfile)
 usersRouter.post("/signup", usersController.signUp)
 
 usersRouter.post("/login", usersController.login)
+
+usersRouter.delete("/delete/:user_id", usersController.deleteUser)

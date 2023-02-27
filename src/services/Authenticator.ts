@@ -6,9 +6,9 @@ import CustomError from '../errors/CustomError'
 dotenv.config()
 
 class Authenticator {
-    generateToken = ({id}: AuthenticationData): string => {
+    generateToken = ({id, role}: AuthenticationData): string => {
         const token = jwt.sign(
-            { id },
+            { id, role },
             process.env.JWT_KEY as string,
             { expiresIn: "24h"}
         )

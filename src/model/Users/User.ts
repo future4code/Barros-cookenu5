@@ -3,7 +3,8 @@ class User {
         private id: string,
         private full_name: string,
         private email: string,
-        private password: string
+        private password: string,
+        private role: string
     ){
     }
 }

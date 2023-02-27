@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import UsersBusiness from "../business/UsersBusiness"
-import { GetProfileInputDTO, GetUserProfileInputDTO, LoginInputDTO, SignUpInputDTO, TokenInputDTO } from "../model/Users/UsersDTO"
+import { DeleteUserInputDTO, GetProfileInputDTO, GetUserProfileInputDTO, LoginInputDTO, SignUpInputDTO, TokenInputDTO } from "../model/Users/UsersDTO"
 
 const usersBusiness = new UsersBusiness()
 
@@ -25,7 +25,8 @@ class UsersController {
             const input: SignUpInputDTO = {
                 fullName: req.body.fullName,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                role: req.body.role
             }
 
             const token = await usersBusiness.signUp(input)
@@ -89,6 +90,21 @@ class UsersController {
             const feed = await usersBusiness.getUserFeed(input)
 
             res.status(200).send(feed)
+        } catch (err: any) {
+            res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
+        }
+    }
+
+    deleteUser = async (req: Request, res: Response) => {
+        try {
+            const input: DeleteUserInputDTO = {
+                userId: req.params.user_id,
+                token: req.headers.authorization as string
+            }
+
+            await usersBusiness.deleteUser(input)
+
+            res.status(200).send("User deleted.")
         } catch (err: any) {
             res.status(err.statusCode || 400).send(err.message || err.sqlMessage)
         }

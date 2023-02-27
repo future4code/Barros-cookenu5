@@ -5,13 +5,16 @@ import EmptyList from "../errors/EmptyList"
 import MissingAuthorToken from "../errors/RecipesErrors/MissingAuthorId"
 import MissingDescription from "../errors/RecipesErrors/MissingDescription"
 import MissingInfosCreate from "../errors/RecipesErrors/MissingInfosCreate"
+import MissingInfosEdit from "../errors/RecipesErrors/MissingInfosEdit"
 import MissingRecipeId from "../errors/RecipesErrors/MissingRecipeId"
 import MissingTitle from "../errors/RecipesErrors/MissingTitle"
+import NotNormalUser from "../errors/RecipesErrors/NotNormalUser"
+import RecipeAnotherUser from "../errors/RecipesErrors/RecipeAnotherUser"
 import RecipeNotFound from "../errors/RecipesErrors/RecipeNotFound"
 import MissingUserToken from "../errors/UsersErrors/MissingUserToken"
 import UserNotFound from "../errors/UsersErrors/UserNotFound"
 import Recipe from "../model/Recipes/Recipe"
-import { CreateRecipeInputDTO, GetRecipeInputDTO } from "../model/Recipes/RecipesDTO"
+import { CreateRecipeInputDTO, DeleteRecipeInputDTO, EditRecipeInputDTO, GetRecipeInputDTO } from "../model/Recipes/RecipesDTO"
 import { TokenInputDTO } from "../model/Users/UsersDTO"
 import Authenticator from "../services/Authenticator"
 import IdGenerator from "../services/IdGenerator"
@@ -79,10 +82,10 @@ class RecipesBusiness {
                 throw new MissingAuthorToken()
             }
 
-            const userId = authenticatorManager.getTokenPayload(input.token)
+            const userData = authenticatorManager.getTokenPayload(input.token)
 
             const users = await usersDatabase.getAllUsers()
-            const userExisting = users.filter(user => user.id === userId.id)
+            const userExisting = users.filter(user => user.id === userData.id)
 
             if(userExisting.length < 1){
                 throw new UserNotFound()
@@ -93,7 +96,7 @@ class RecipesBusiness {
                 input.title,
                 input.description,
                 new Date(),
-                userId.id
+                userData.id
             )
 
             await recipesDatabase.insertRecipe(newRecipe)
@@ -101,6 +104,69 @@ class RecipesBusiness {
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }
+    }
+
+    editRecipe = async (input: EditRecipeInputDTO) => {
+        try {
+
+            if(input.recipeId === ":recipe_id"){
+                throw new MissingRecipeId()
+            } if(!input.title && !input.description){
+                throw new MissingInfosEdit()
+            } if(!input.token){
+                throw new MissingAuthorToken()
+            }
+
+            const userData = authenticatorManager.getTokenPayload(input.token)
+
+            const allRecipes = await recipesDatabase.getAllRecipes()
+
+            const recipeExisting = allRecipes.filter(recipe => recipe.id === input.recipeId)
+            
+            if(recipeExisting.length < 1){
+                throw new RecipeNotFound()
+            }
+
+            if(recipeExisting[0].author_id !== userData.id){
+                throw new RecipeAnotherUser()
+            }
+
+            if(userData.role === "NORMAL"){
+                await recipesDatabase.updateRecipe(input)
+            } else {
+                throw new NotNormalUser()
+            }
+        } catch (err: any) {
+            throw new CustomError(err.statusCode, err.message)
+        }        
+    }
+
+    deleteRecipe = async (input: DeleteRecipeInputDTO) => {
+        if(input.recipeId === ":recipe_id"){
+            throw new MissingRecipeId()
+        } if(!input.token){
+            throw new MissingAuthorToken()
+        }
+
+        const userData = authenticatorManager.getTokenPayload(input.token)
+
+        const allRecipes = await recipesDatabase.getAllRecipes()
+
+        const recipeExisting = allRecipes.filter(recipe => recipe.id === input.recipeId)
+        
+        if(recipeExisting.length < 1){
+            throw new RecipeNotFound()
+        }
+
+        if(userData.role === "ADMIN"){
+            await recipesDatabase.deleteRecipe(input)
+        }
+
+        if(recipeExisting[0].author_id !== userData.id){
+            throw new RecipeAnotherUser()
+        }
+
+        await recipesDatabase.deleteRecipe(input)
     }
 }
 

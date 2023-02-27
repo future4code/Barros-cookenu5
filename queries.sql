@@ -1,9 +1,10 @@
--- Active: 1674753776608@@35.226.146.116@3306@jbl-4416257-giovana-vieira
+-- Active: 1677514415647@@35.226.146.116@3306@jbl-4416257-giovana-vieira
 CREATE TABLE IF NOT EXISTS cookenu_users (
     id VARCHAR(255) PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    role ENUM("ADMIN", "NORMAL") NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS cookenu_recipes (

@@ -1,7 +1,8 @@
 export interface SignUpInputDTO {
     fullName: string, 
     email: string,
-    password: string
+    password: string,
+    role: string
 }
 
 export interface LoginInputDTO {
@@ -14,6 +15,11 @@ export interface GetProfileInputDTO {
 }
 
 export interface GetUserProfileInputDTO {
+    userId: string,
+    token: string
+}
+
+export interface DeleteUserInputDTO {
     userId: string,
     token: string
 }

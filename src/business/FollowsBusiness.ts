@@ -57,18 +57,18 @@ class FollowsBusiness {
             const users = await usersDatabase.getAllUsers()
             const userExisting = users.filter(user => user.id === input.userToFollowId)
 
-            const userId = await authenticatorManager.getTokenPayload(input.token)
+            const userData = await authenticatorManager.getTokenPayload(input.token)
 
             if(userExisting.length < 1){
                 throw new UserNotFound()
             } 
 
-            if(input.userToFollowId === userId.id){
+            if(input.userToFollowId === userData.id){
                 throw new OwnUser()
             }
             
             const follows = await followsDatabase.getAllFollows()
-            const userAlreadyFollowed = follows.filter(follow => follow.user_id === userId.id && follow.followed_user === input.userToFollowId)
+            const userAlreadyFollowed = follows.filter(follow => follow.user_id === userData.id && follow.followed_user === input.userToFollowId)
             
             if(userAlreadyFollowed.length > 0){
                 throw new UserAlreadyFollowed()
@@ -76,7 +76,7 @@ class FollowsBusiness {
 
             const newFollow = new Follow(
                 idGenerator.idGenerator(), 
-                userId.id,
+                userData.id,
                 input.userToFollowId
             )
             
@@ -100,20 +100,20 @@ class FollowsBusiness {
             const users = await usersDatabase.getAllUsers()
             const userExisting = users.filter(user => user.id === input.userToUnfollowId)
 
-            const userId = await authenticatorManager.getTokenPayload(input.token)
+            const userData = await authenticatorManager.getTokenPayload(input.token)
 
             if(userExisting.length < 1){
                 throw new UserNotFound()
             } 
             
             const follows = await followsDatabase.getAllFollows()
-            const userFollowed = follows.filter(follow => follow.user_id === userId.id && follow.followed_user === input.userToUnfollowId)
+            const userFollowed = follows.filter(follow => follow.user_id === userData.id && follow.followed_user === input.userToUnfollowId)
             
             if(userFollowed.length < 1){
                 throw new UserNotFollowed()
-            }            
+            }          
             
-            await followsDatabase.deleteFollow(input, userId)
+            await followsDatabase.deleteFollow(input, userData)
         } catch (err: any) {
             throw new CustomError(err.statusCode, err.message)
         }
